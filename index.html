@@ -857,31 +857,47 @@ footer{
     size:A4 portrait;
     margin:18mm 20mm 18mm 20mm;
   }
-  *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-  nav,#pg-home,#pg-alertas,#pg-guias,#pg-quiz,#pg-recursos,
-  .hero,.feat-grid,.oms-strip,.sec-label,.sec-title,.sec-desc,
-  #ct-card,.ct-actions,.pv-actions,footer,.modal,
-  body::before{display:none!important;}
-  body{background:white!important;margin:0;padding:0;}
-  #pg-contrato{display:block!important;}
-  .sw{padding:0!important;max-width:100%!important;}
-  #ct-preview{display:block!important;box-shadow:none!important;border:none!important;padding:0!important;margin:0!important;}
-  .pv-title-block h2{font-size:1.3rem;}
-  .pv-preamble,.pv-commitment{font-size:.82rem;line-height:1.65;padding:.9rem 1rem;border-left:3px solid #4B78FF;background:#f5f8ff!important;margin-bottom:1rem;page-break-inside:avoid;}
-  .pv-commitment{border-left-color:#15C0A8;}
-  .pv-parties{padding:.9rem 1rem;background:#f5f8ff!important;page-break-inside:avoid;margin-bottom:1rem;}
-  .pv-parties h4{font-size:.65rem;margin-bottom:.5rem;}
-  .pv-party{font-size:.82rem;margin-bottom:.2rem;}
-  .pv-clauses-title{font-size:.78rem;margin-bottom:.5rem;}
-  .pv-clause{font-size:.78rem;margin-bottom:.35rem;line-height:1.45;page-break-inside:avoid;}
-  .pv-n{color:#4B78FF;}
-  .pv-sigs{display:grid!important;grid-template-columns:1fr 1fr!important;gap:2rem;margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid #dde4ef;page-break-inside:avoid;}
-  .pv-sig-name{font-size:1rem;min-height:38px;border-bottom:1px solid #dde4ef;margin-bottom:.3rem;padding-bottom:.2rem;}
-  .pv-sig-lbl{font-size:.6rem;}
-  .pv-header{display:flex!important;flex-direction:row!important;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid #dde4ef;page-break-inside:avoid;}
-  .pv-brand{font-size:.72rem;}
-  .pv-brand strong{font-size:.88rem;}
-  .pv-title-block p{font-size:.7rem;}
+
+  /* --- ocultar TUDO --- */
+  html, body { height:auto!important; overflow:visible!important; }
+  body > *                        { display:none!important; }
+  body::before                    { display:none!important; }
+
+  /* --- mostrar só a secção do contrato --- */
+  #pg-contrato                    { display:block!important; }
+  #pg-contrato .sw                { display:block!important; padding:0!important; max-width:100%!important; }
+
+  /* --- mostrar só o preview gerado, ocultar o formulário e botões --- */
+  #ct-card                        { display:none!important; }
+  .sec-label, .sec-title, .sec-desc { display:none!important; }
+  #ct-preview                     { display:block!important; box-shadow:none!important; border:none!important; padding:0!important; margin:0!important; }
+  .pv-actions                     { display:none!important; }
+
+  /* --- garantir cores na impressão --- */
+  *{ -webkit-print-color-adjust:exact!important; print-color-adjust:exact!important; }
+
+  /* --- tipografia e layout --- */
+  .pv-header{ display:flex!important; flex-direction:row!important; margin-bottom:1.2rem; padding-bottom:1rem; border-bottom:1px solid #dde4ef; page-break-inside:avoid; }
+  .pv-brand{ font-size:.72rem; }
+  .pv-brand strong{ font-size:.88rem; }
+  .pv-title-block h2{ font-size:1.3rem; }
+  .pv-title-block p{ font-size:.7rem; }
+
+  .pv-preamble, .pv-commitment{ font-size:.82rem; line-height:1.65; padding:.9rem 1rem; background:#f5f8ff!important; margin-bottom:1rem; page-break-inside:avoid; }
+  .pv-preamble{ border-left:3px solid #4B78FF; border-radius:0 8px 8px 0; }
+  .pv-commitment{ border-left:3px solid #15C0A8; border-radius:0 8px 8px 0; }
+
+  .pv-parties{ padding:.9rem 1rem; background:#f5f8ff!important; border-radius:8px; page-break-inside:avoid; margin-bottom:1rem; }
+  .pv-parties h4{ font-size:.65rem; margin-bottom:.5rem; }
+  .pv-party{ font-size:.82rem; margin-bottom:.2rem; }
+
+  .pv-clauses-title{ font-size:.78rem; margin-bottom:.5rem; }
+  .pv-clause{ font-size:.78rem; margin-bottom:.35rem; line-height:1.45; page-break-inside:avoid; }
+  .pv-n{ color:#4B78FF; }
+
+  .pv-sigs{ display:grid!important; grid-template-columns:1fr 1fr!important; gap:2rem; margin-top:1.5rem; padding-top:1.2rem; border-top:1px solid #dde4ef; page-break-inside:avoid; }
+  .pv-sig-name{ font-size:1rem; min-height:38px; border-bottom:1px solid #dde4ef; margin-bottom:.3rem; padding-bottom:.2rem; }
+  .pv-sig-lbl{ font-size:.6rem; }
 }
 </style>
 </head>
