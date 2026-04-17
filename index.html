@@ -849,22 +849,8 @@ footer{
 .age-tile:nth-child(4){animation-delay:.5s;}
 
 /* ── RESPONSIVE ── */
-@media(max-width:900px){
-  .hero{grid-template-columns:1fr;}
-  .hero-left{border-right:none;border-bottom:1.5px solid var(--border);padding:3.5rem 2rem;}
-  .hero-right{padding:2.5rem 2rem;}
-  .alertas-grid{grid-template-columns:1fr;}
-  .apanel.on{grid-template-columns:1fr;}
-  .feat-grid{grid-template-columns:1fr 1fr;}
-  .rec-grid{grid-template-columns:1fr;}
-  .ct-row{grid-template-columns:1fr;}
-  .ct-sigs{grid-template-columns:1fr;}
-  .pv-sigs{grid-template-columns:1fr;}
-  .pv-header{flex-direction:column;gap:1rem;}
-  .oms-strip{gap:2.5rem;}
-  nav .n-links{display:none;}
-  footer{flex-direction:column;align-items:flex-start;}
-}
+@media(max-width:900px) {
+  .hero { grid-template
 
 @media print{
   nav,#pg-home,.hero,.feat-grid,.oms-strip,.sec-label,.sec-title,.sec-desc,
@@ -1413,12 +1399,15 @@ footer{
       <div class="rec-foot"><span class="rec-size">A5 · 4 páginas</span><button class="rec-btn" onclick="openModal()">⬇ Descarregar</button></div>
     </div>
     <div class="rec-card">
-      <div class="rec-thumb">🧒</div>
+      <div class="rec-thumb">📦</div>
       <div class="rec-type">PDF · Atividades</div>
-      <h3>O Meu Dia sem Ecrãs</h3>
-      <p>Caderno de atividades para crianças dos 4–8 anos com alternativas criativas ao ecrã.</p>
-      <div class="rec-foot"><span class="rec-size">A4 · 8 páginas</span><button class="rec-btn" onclick="openModal()">⬇ Descarregar</button></div>
-    </div>
+      <h3>A Caixa do Tédio</h3>
+      <p>Guia imprimível para pais com ideias simples e criativas sem ecrãs para crianças dos 3 aos 10 anos.</p>
+      <div class="rec-foot">
+    <span class="rec-size">A4 5 páginas</span>
+    <button class="rec-btn" onclick="openTedioPDF()">Descarregar</button>
+  </div>
+</div>
     <div class="rec-card">
       <div class="rec-thumb">📱</div>
       <div class="rec-type">PDF · Infográfico</div>
@@ -1606,5 +1595,6 @@ document.getElementById('modal').addEventListener('click',e=>{if(e.target===docu
 // ── INIT ──
 renderQ();setCtDate();
 </script>
+  function openTedioPDF(){window.open('A-Caixa-do-Tedio.pdf','_blank')}
 </body>
 </html>
