@@ -853,10 +853,35 @@ footer{
   .hero { grid-template
 
 @media print{
-  nav,#pg-home,.hero,.feat-grid,.oms-strip,.sec-label,.sec-title,.sec-desc,
-  #ct-card,.ct-actions,footer,.modal{display:none!important;}
-  #ct-preview{display:block!important;box-shadow:none!important;border:none!important;}
-  body{background:white!important;}
+  @page{
+    size:A4 portrait;
+    margin:18mm 20mm 18mm 20mm;
+  }
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  nav,#pg-home,#pg-alertas,#pg-guias,#pg-quiz,#pg-recursos,
+  .hero,.feat-grid,.oms-strip,.sec-label,.sec-title,.sec-desc,
+  #ct-card,.ct-actions,.pv-actions,footer,.modal,
+  body::before{display:none!important;}
+  body{background:white!important;margin:0;padding:0;}
+  #pg-contrato{display:block!important;}
+  .sw{padding:0!important;max-width:100%!important;}
+  #ct-preview{display:block!important;box-shadow:none!important;border:none!important;padding:0!important;margin:0!important;}
+  .pv-title-block h2{font-size:1.3rem;}
+  .pv-preamble,.pv-commitment{font-size:.82rem;line-height:1.65;padding:.9rem 1rem;border-left:3px solid #4B78FF;background:#f5f8ff!important;margin-bottom:1rem;page-break-inside:avoid;}
+  .pv-commitment{border-left-color:#15C0A8;}
+  .pv-parties{padding:.9rem 1rem;background:#f5f8ff!important;page-break-inside:avoid;margin-bottom:1rem;}
+  .pv-parties h4{font-size:.65rem;margin-bottom:.5rem;}
+  .pv-party{font-size:.82rem;margin-bottom:.2rem;}
+  .pv-clauses-title{font-size:.78rem;margin-bottom:.5rem;}
+  .pv-clause{font-size:.78rem;margin-bottom:.35rem;line-height:1.45;page-break-inside:avoid;}
+  .pv-n{color:#4B78FF;}
+  .pv-sigs{display:grid!important;grid-template-columns:1fr 1fr!important;gap:2rem;margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid #dde4ef;page-break-inside:avoid;}
+  .pv-sig-name{font-size:1rem;min-height:38px;border-bottom:1px solid #dde4ef;margin-bottom:.3rem;padding-bottom:.2rem;}
+  .pv-sig-lbl{font-size:.6rem;}
+  .pv-header{display:flex!important;flex-direction:row!important;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid #dde4ef;page-break-inside:avoid;}
+  .pv-brand{font-size:.72rem;}
+  .pv-brand strong{font-size:.88rem;}
+  .pv-title-block p{font-size:.7rem;}
 }
 </style>
 </head>
