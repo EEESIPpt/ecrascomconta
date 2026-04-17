@@ -102,6 +102,56 @@ nav{
   color:var(--muted);letter-spacing:.03em;white-space:nowrap;
 }
 
+/* ── HAMBURGER ── */
+.n-hamburger{
+  display:none;
+  flex-direction:column;justify-content:center;align-items:center;
+  gap:5px;width:38px;height:38px;
+  background:none;border:1.5px solid var(--border);
+  border-radius:var(--r);cursor:pointer;
+  margin-left:auto;flex-shrink:0;
+  transition:border-color .2s;
+}
+.n-hamburger:hover{border-color:var(--blue);}
+.n-hamburger span{
+  display:block;width:18px;height:2px;
+  background:var(--ink);border-radius:2px;
+  transition:all .3s;transform-origin:center;
+}
+.n-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.n-hamburger.open span:nth-child(2){opacity:0;}
+.n-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* ── MOBILE DRAWER ── */
+.n-drawer{
+  display:none;
+  position:fixed;top:64px;left:0;right:0;bottom:0;
+  z-index:299;
+  background:rgba(26,34,53,.35);
+  backdrop-filter:blur(4px);
+}
+.n-drawer.open{display:block;}
+.n-drawer-inner{
+  background:white;
+  border-bottom:1.5px solid var(--border);
+  padding:1rem 1.5rem 1.5rem;
+  display:flex;flex-direction:column;gap:.35rem;
+  box-shadow:0 8px 24px rgba(26,34,53,.1);
+}
+.n-drawer-btn{
+  padding:.75rem 1rem;border-radius:var(--r);
+  font-family:'Nunito',sans-serif;font-size:.95rem;font-weight:700;
+  color:var(--ink);background:none;border:none;cursor:pointer;
+  text-align:left;transition:background .2s;width:100%;
+}
+.n-drawer-btn:hover,.n-drawer-btn.on{background:rgba(75,120,255,.08);color:var(--blue);}
+.n-drawer-pill{
+  font-family:'Nunito',sans-serif;font-size:.72rem;font-weight:800;
+  padding:.5rem 1rem;border-radius:var(--r);
+  background:var(--sky);color:var(--muted);
+  margin-top:.5rem;text-align:center;
+}
+
 /* ── PAGE SPA ── */
 .pg{display:none;}
 .pg.on{display:block;}
@@ -849,55 +899,110 @@ footer{
 .age-tile:nth-child(4){animation-delay:.5s;}
 
 /* ── RESPONSIVE ── */
-@media(max-width:900px) {
-  .hero { grid-template
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;}
+  .hero-left{border-right:none;border-bottom:1.5px solid var(--border);padding:3.5rem 2rem;}
+  .hero-right{padding:2.5rem 2rem;}
+  .alertas-grid{grid-template-columns:1fr;}
+  .apanel.on{grid-template-columns:1fr;}
+  .feat-grid{grid-template-columns:1fr 1fr;}
+  .rec-grid{grid-template-columns:1fr;}
+  .ct-row{grid-template-columns:1fr;}
+  .ct-sigs{grid-template-columns:1fr;}
+  .pv-sigs{grid-template-columns:1fr;}
+  .pv-header{flex-direction:column;gap:1rem;}
+  .oms-strip{gap:2.5rem;}
+  nav .n-links{display:none;}
+  nav .n-pill{display:none;}
+  .n-hamburger{display:flex;}
+  footer{flex-direction:column;align-items:flex-start;}
+}
 
 @media print{
+  /* ── Página A4 ── */
   @page{
     size:A4 portrait;
     margin:18mm 20mm 18mm 20mm;
   }
 
-  /* --- ocultar TUDO --- */
-  html, body { height:auto!important; overflow:visible!important; }
-  body > *                        { display:none!important; }
-  body::before                    { display:none!important; }
+  /* ── Ocultar tudo excepto o contrato ── */
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  nav,#pg-home,#pg-alertas,#pg-guias,#pg-quiz,#pg-recursos,
+  .hero,.feat-grid,.oms-strip,.sec-label,.sec-title,.sec-desc,
+  #ct-card,.ct-actions,.pv-actions,footer,.modal,
+  body::before{display:none!important;}
 
-  /* --- mostrar só a secção do contrato --- */
-  #pg-contrato                    { display:block!important; }
-  #pg-contrato .sw                { display:block!important; padding:0!important; max-width:100%!important; }
+  /* ── Mostrar e limpar o preview ── */
+  body{background:white!important;margin:0;padding:0;}
+  #pg-contrato{display:block!important;}
+  .sw{padding:0!important;max-width:100%!important;}
+  #ct-preview{
+    display:block!important;
+    box-shadow:none!important;
+    border:none!important;
+    padding:0!important;
+    margin:0!important;
+  }
 
-  /* --- mostrar só o preview gerado, ocultar o formulário e botões --- */
-  #ct-card                        { display:none!important; }
-  .sec-label, .sec-title, .sec-desc { display:none!important; }
-  #ct-preview                     { display:block!important; box-shadow:none!important; border:none!important; padding:0!important; margin:0!important; }
-  .pv-actions                     { display:none!important; }
+  /* ── Tipografia ── */
+  .pv-title-block h2{font-size:1.3rem;}
+  .pv-preamble,.pv-commitment{
+    font-size:.82rem;
+    line-height:1.65;
+    padding:.9rem 1rem;
+    border-left:3px solid #4B78FF;
+    background:#f5f8ff!important;
+    margin-bottom:1rem;
+    page-break-inside:avoid;
+  }
+  .pv-commitment{border-left-color:#15C0A8;}
+  .pv-parties{
+    padding:.9rem 1rem;
+    background:#f5f8ff!important;
+    page-break-inside:avoid;
+    margin-bottom:1rem;
+  }
+  .pv-parties h4{font-size:.65rem;margin-bottom:.5rem;}
+  .pv-party{font-size:.82rem;margin-bottom:.2rem;}
+  .pv-clauses-title{font-size:.78rem;margin-bottom:.5rem;}
+  .pv-clause{font-size:.78rem;margin-bottom:.35rem;line-height:1.45;}
+  .pv-n{color:#4B78FF;}
 
-  /* --- garantir cores na impressão --- */
-  *{ -webkit-print-color-adjust:exact!important; print-color-adjust:exact!important; }
+  /* ── Assinaturas ── */
+  .pv-sigs{
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:2rem;
+    margin-top:1.5rem;
+    padding-top:1.2rem;
+    border-top:1px solid #dde4ef;
+    page-break-inside:avoid;
+  }
+  .pv-sig-name{
+    font-size:1rem;
+    min-height:38px;
+    border-bottom:1px solid #dde4ef;
+    margin-bottom:.3rem;
+    padding-bottom:.2rem;
+  }
+  .pv-sig-lbl{font-size:.6rem;}
 
-  /* --- tipografia e layout --- */
-  .pv-header{ display:flex!important; flex-direction:row!important; margin-bottom:1.2rem; padding-bottom:1rem; border-bottom:1px solid #dde4ef; page-break-inside:avoid; }
-  .pv-brand{ font-size:.72rem; }
-  .pv-brand strong{ font-size:.88rem; }
-  .pv-title-block h2{ font-size:1.3rem; }
-  .pv-title-block p{ font-size:.7rem; }
+  /* ── Cabeçalho ── */
+  .pv-header{
+    display:flex!important;
+    flex-direction:row!important;
+    margin-bottom:1.2rem;
+    padding-bottom:1rem;
+    border-bottom:1px solid #dde4ef;
+    page-break-inside:avoid;
+  }
+  .pv-brand{font-size:.72rem;}
+  .pv-brand strong{font-size:.88rem;}
+  .pv-title-block p{font-size:.7rem;}
 
-  .pv-preamble, .pv-commitment{ font-size:.82rem; line-height:1.65; padding:.9rem 1rem; background:#f5f8ff!important; margin-bottom:1rem; page-break-inside:avoid; }
-  .pv-preamble{ border-left:3px solid #4B78FF; border-radius:0 8px 8px 0; }
-  .pv-commitment{ border-left:3px solid #15C0A8; border-radius:0 8px 8px 0; }
-
-  .pv-parties{ padding:.9rem 1rem; background:#f5f8ff!important; border-radius:8px; page-break-inside:avoid; margin-bottom:1rem; }
-  .pv-parties h4{ font-size:.65rem; margin-bottom:.5rem; }
-  .pv-party{ font-size:.82rem; margin-bottom:.2rem; }
-
-  .pv-clauses-title{ font-size:.78rem; margin-bottom:.5rem; }
-  .pv-clause{ font-size:.78rem; margin-bottom:.35rem; line-height:1.45; page-break-inside:avoid; }
-  .pv-n{ color:#4B78FF; }
-
-  .pv-sigs{ display:grid!important; grid-template-columns:1fr 1fr!important; gap:2rem; margin-top:1.5rem; padding-top:1.2rem; border-top:1px solid #dde4ef; page-break-inside:avoid; }
-  .pv-sig-name{ font-size:1rem; min-height:38px; border-bottom:1px solid #dde4ef; margin-bottom:.3rem; padding-bottom:.2rem; }
-  .pv-sig-lbl{ font-size:.6rem; }
+  /* ── Evitar quebras indesejadas ── */
+  .pv-clause{page-break-inside:avoid;}
+  #ct-preview > *{page-break-inside:avoid;}
 }
 </style>
 </head>
@@ -917,7 +1022,22 @@ footer{
     <button class="n-btn" onclick="go('recursos')">Recursos</button>
   </div>
   <div class="n-pill">🩺 Por ESIP</div>
+  <button class="n-hamburger" id="hamburger" onclick="toggleDrawer()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE DRAWER -->
+<div class="n-drawer" id="drawer" onclick="closeDrawer(event)">
+  <div class="n-drawer-inner">
+    <button class="n-drawer-btn" onclick="goMobile('alertas')">⚠️ Alertas</button>
+    <button class="n-drawer-btn" onclick="goMobile('guias')">📋 Guias por Idade</button>
+    <button class="n-drawer-btn" onclick="goMobile('quiz')">✏️ Avaliação</button>
+    <button class="n-drawer-btn" onclick="goMobile('contrato')">📄 Contrato Familiar</button>
+    <button class="n-drawer-btn" onclick="goMobile('recursos')">📦 Recursos</button>
+    <div class="n-drawer-pill">🩺 Por Enfermeiros ESIP</div>
+  </div>
+</div>
 
 <!-- ═══ HOME ═══ -->
 <div id="pg-home" class="pg on">
@@ -1415,16 +1535,12 @@ footer{
   <p class="sec-desc">Infográficos, guias e materiais práticos desenvolvidos pela equipa de enfermeiros especialistas em Saúde Infantil e Pediátrica. Gratuitos, para imprimir e partilhar.</p>
   <div class="rec-grid">
     <div class="rec-card">
-  <div class="rec-thumb">📅</div>
-  <div class="rec-type">PDF Planner</div>
-  <h3>Plano Semanal Familiar</h3>
-  <p>Organizador semanal para gerir o tempo de ecrã da família.</p>
-  <div class="rec-foot">
-    <span class="rec-size">A4 2 páginas</span>
-    <a class="rec-btn" href="Plano Semanal Familiar.pdf" 
-       target="_blank" rel="noopener">Ver PDF</a>
-  </div>
-</div>
+      <div class="rec-thumb">📅</div>
+      <div class="rec-type">PDF · Planner</div>
+      <h3>Plano Semanal Familiar</h3>
+      <p>Organizador semanal para gerir o tempo de ecrã da família.</p>
+      <div class="rec-foot"><span class="rec-size">A4 · 2 páginas</span><a class="rec-btn" href="Plano Semanal Familiar.pdf" target="_blank" rel="noopener">Ver PDF</a></div>
+    </div>
     <div class="rec-card">
       <div class="rec-thumb">✅</div>
       <div class="rec-type">PDF · Checklist</div>
@@ -1444,11 +1560,8 @@ footer{
       <div class="rec-type">PDF · Atividades</div>
       <h3>A Caixa do Tédio</h3>
       <p>Guia imprimível para pais com ideias simples e criativas sem ecrãs para crianças dos 3 aos 10 anos.</p>
-      <div class="rec-foot">
-    <span class="rec-size">A4 5 páginas</span>
-    <a class="rec-btn" href="A-Caixa-do-Tedio.pdf" download>⬇ Descarregar</a>
-  </div>
-</div>
+      <div class="rec-foot"><span class="rec-size">A4 · 5 páginas</span><a class="rec-btn" href="A-Caixa-do-Tedio.pdf" download>⬇ Descarregar</a></div>
+    </div>
     <div class="rec-card">
       <div class="rec-thumb">📱</div>
       <div class="rec-type">PDF · Infográfico</div>
@@ -1497,11 +1610,26 @@ footer{
 // ── SPA NAV ──
 function go(name){
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
-  document.querySelectorAll('.n-btn').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.n-btn,.n-drawer-btn').forEach(b=>b.classList.remove('on'));
   document.getElementById('pg-'+name).classList.add('on');
   const b=document.querySelector(`[onclick="go('${name}')"]`);
   if(b)b.classList.add('on');
   window.scrollTo({top:0,behavior:'smooth'});
+}
+function goMobile(name){
+  closeDrawer();
+  go(name);
+}
+function toggleDrawer(){
+  const h=document.getElementById('hamburger');
+  const d=document.getElementById('drawer');
+  h.classList.toggle('open');
+  d.classList.toggle('open');
+}
+function closeDrawer(e){
+  if(e && e.target!==document.getElementById('drawer'))return;
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('drawer').classList.remove('open');
 }
 function goAge(id){
   go('guias');
